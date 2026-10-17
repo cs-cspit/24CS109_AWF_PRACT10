@@ -12,6 +12,14 @@ const taskRoutes = require('./routes/tasks');
 
 const app = express();
 
+// Catch unexpected exceptions or rejections gracefully
+process.on('uncaughtException', (err) => {
+  console.error('[Process Error] Uncaught Exception:', err);
+});
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('[Process Error] Unhandled Rejection:', reason);
+});
+
 // ── Middleware Pipeline ──────────────────────────────────────────
 app.use(cors());
 app.use(express.json());
